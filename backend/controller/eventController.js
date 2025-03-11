@@ -10,10 +10,10 @@ const getAllEvent = async (req, res) => {
   }
 };
 
-const getByIdEvent = async (req, res) => {
+const getEventById = async (req, res) => {
   try {
     const id = req.params.id;
-    const event = await EventModel.getByIdEvent(id);
+    const event = await EventModel.getEventById(id);
     if (!event) return res.status(404).json({ error: "Event not found" });
     res.json(event);
   } catch (err) {
@@ -62,7 +62,7 @@ const deleteEvent = async (req, res) => {
 
 module.exports = {
   getAllEvent,
-  getByIdEvent,
+  getEventById,
   createEvent,
   updateEvent,
   deleteEvent,

@@ -90,34 +90,10 @@ const deleteHelp = async (req, res) => {
   }
 };
 
-const addComment = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const { commentText } = req.body;
-    const updatedHelp = await HelpModel.addComment(id, commentText);
-    res.json(updatedHelp);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
-
-const removeComment = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const { commentText } = req.body;
-    const updatedHelp = await HelpModel.removeComment(id, commentText);
-    res.json(updatedHelp);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
-
 module.exports = {
   getAllHelp,
   getHelpById,
   createHelp,
   updateHelp,
   deleteHelp,
-  addComment,
-  removeComment,
 };

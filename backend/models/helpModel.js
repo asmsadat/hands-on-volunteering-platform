@@ -13,8 +13,8 @@ const HelpModel =  {
 
     createHelp: async (id, title, description, date, time, location, category, urgencylevel, createdby, createdat ) => {
     const result = await pool.query(
-      `INSERT INTO helps (id, title, description, date, time, location, category, urgencylevel, createdby, createdat, comments)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, ARRAY[]::TEXT[]) RETURNING *`,
+      `INSERT INTO helps (id, title, description, date, time, location, category, urgencylevel, createdby, createdat)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
       [id, title, description, date, time, location, category, urgencylevel, createdby, createdat]
     );
     return result.rows[0];
@@ -32,22 +32,6 @@ const HelpModel =  {
     deleteHelp: async (id) => {
     const result = await pool.query("DELETE FROM helps WHERE id = $1 RETURNING *", [id]);
     return result.rowCount > 0;
-  },
-
-    addComment: async (id, commentText) => {
-    const result = await pool.query(
-      `UPDATE helps SET comments = array_append(comments, $1) WHERE id = $2 RETURNING *`,
-      [commentText, id]
-    );
-    return result.rows[0];
-  },
-
-    removeComment: async (id, commentText) => {
-    const result = await pool.query(
-      `UPDATE helps SET comments = array_remove(comments, $1) WHERE id = $2 RETURNING *`,
-      [commentText, id]
-    );
-    return result.rows[0];
   }
 }
 

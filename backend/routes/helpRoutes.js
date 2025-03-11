@@ -9,9 +9,5 @@ router.post("/", createHelp);
 router.put("/:id", updateHelp);
 router.delete("/:id", deleteHelp);
 
-// Comment management
-router.post("/:id/comments", addComment);
-router.delete("/:id/comments", removeComment);
-
 module.exports = router;
 

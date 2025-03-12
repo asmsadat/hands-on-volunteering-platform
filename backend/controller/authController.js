@@ -1,17 +1,19 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require('uuid');
 const UserModel = require("../models/userModel");
 const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
 const signup = async (req, res) => {
   try {
+    const id = uuidv4();
     const { name, email, password } = req.body;
     const existingUser = await UserModel.findByEmail(email);
     if (existingUser)
       return res.status(400).json({ error: "Email already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await UserModel.create({ name, email, hashedPassword });
+    const newUser = await UserModel.createUser( id, name, email, hashedPassword );
 
     res
       .status(201)

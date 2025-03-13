@@ -25,28 +25,26 @@ const Navbar = () => {
         <div className="flex items-center md:gap-16 gap-4">
           <div className="relative flex items-center md:space-x-3 space-x-2">
             {/* Logo */}
-            
               <img src={logo} alt="Logo" className="w-20" />
-            
           </div>
         </div>
 
         {/* Middle part */}
-        <div className="relative flex items-center space-x-4 md:space-x-6 text-base md:text-lg font-medium text-green-800">
-          <p>Event</p>
-          <p>Help</p>
-          <p>Team</p>
+        <div className="relative flex items-center space-x-4 md:space-x-6 text-base md:text-lg font-medium text-gray-900">
+          <Link to="/">Event</Link>
+          <Link to="/">Help</Link>
+          <Link to="/">Team</Link>
         </div>
 
         {/* Right part */}
         <div className="flex items-center md:gap-16 gap-4">
-          <div>
+          <div className="relative">
             <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
               <FaUser className="size-6" />
             </button>
             {/* show dropdown */}
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-40">
+              <div className="absolute right-0 mt-2 w-48 bg-white  shadow-lg rounded-md z-40">
                 <ul className="py-2">
                   {navigation.map((item) => (
                     <li
